@@ -5,9 +5,9 @@ import vertex from '../glsl/main.vert'
 // @ts-ignore
 import fragment from '../glsl/main.frag'
 import gsap from 'gsap'
-import baseImage from '../assets/milky-way.jpg'
+// import baseImage from '../assets/milky-way.jpg'
 
-const Scene = () => {
+const Scene = ({image}: {image: string}) => {
     const canvasRef = useRef(null);
     const renderer = useRef(null);
     const mesh = useRef(null);
@@ -21,7 +21,7 @@ const Scene = () => {
 
         // const gl = (canvasEl as HTMLCanvasElement).getContext('webgl');
         const handleResize = () => {
-            (renderer.current as any).setSize(window.innerWidth, window.innerHeight)
+            (renderer.current as any).setSize(400, 400)
 
             if (program.current !== null) {
               (program.current as any).uniforms.uResolution.value = new Vec2(window.innerWidth, window.innerHeight)
@@ -50,7 +50,7 @@ const Scene = () => {
                 })
             };
 
-            const texture = await loadTexture(baseImage);
+            const texture = await loadTexture(image);
 
             handleResize();
 
